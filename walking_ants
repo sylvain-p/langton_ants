@@ -1,0 +1,55 @@
+
+import matplotlib.pyplot as plt
+from numpy import zeros, size, shape, ones, random
+
+length = 101
+
+res = ones((length, length))
+
+x, y = int((shape(res)[0]-1)/2), int((shape(res)[1]-1)/2)
+
+dx, dy = 0, -1 
+
+
+count = 0 
+
+while x >= 0 and x < length and y>=0 and y < length:
+    
+    
+    if res[x,y]==0:
+        res[x,y]=1
+        
+        if dx ==1:
+            dx, dy = 0, -1
+        
+        elif dy == -1:
+            dx, dy = -1, 0
+            
+        elif dx == -1:
+            dx, dy = 0, 1
+            
+        else:
+            dx, dy = 1, 0
+        
+    else:
+        res[x,y]=0
+        
+        if dx ==1:
+            dx, dy = 0, 1
+        
+        elif dy == -1:
+            dx, dy = 1, 0
+            
+        elif dx == -1:
+            dx, dy = 0, -1
+            
+        else:
+            dx, dy = -1, 0
+            
+    x, y = x + dx, y + dy
+        
+    count = count + 1
+
+
+plt.figure(figsize=(10,10))
+plt.imshow(res, cmap = 'gray')
